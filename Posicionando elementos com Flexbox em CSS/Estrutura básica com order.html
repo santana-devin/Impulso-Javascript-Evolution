@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fundamentos -  Order</title>
+    <style>
+        .flex-container{
+            display: flex;
+            border: 1px solid black;
+            max-width: 500px;
+        }
+        .item{
+            flex: 1;
+            background-color: orangered;
+            margin: 5px;
+            padding: 10px;
+            text-align: center;
+            color: white;
+            font-size: 24px;
+        }
+        .oder-0{
+            order: 0;    
+        }
+        .oder-1{
+            order: 1;    
+        }
+        .oder-2{
+            order: 2;    
+        }
+        .oder-3{
+            order: 3;    
+        }
+        .oder-4{
+            order: 4;    
+        }
+   
+    </style>
+</head>
+<body>
+<p>flex-shrink: 1 </p>
+<div class="flex-container">
+    <div class="item oder-3">1</div>
+    <div class="item oder-1">2</div>
+    <div class="item oder-4">3</div>
+    <div class="item oder-2">4</div>
+    <div class="item oder-0">2</div>
+</div>
+
+
+</body>
+</html>
