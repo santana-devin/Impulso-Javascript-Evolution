@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Instagram DIO</title>
+</head>
+<body onLoad="cell1()">
+    <div class="container-wrapper">
+        <div class="column-phone">
+            <img id="cell" src="./img/instagram-celular.png" alt="celular">
+        </div>
+        <div class="column-login">
+            <div class="group">
+                <img src="./img/instagram-logo.png"  class="instagram-logo" alt="instagram logo">
+                <div class="profile-photo">
+                    <img src="./img/profile.jpeg"  alt="foto de perfil">
+                </div>
+                <a class="instagram-login"  href="#">Continue como Fabrício Santana</a>
+                <a class="instagram-logout " href="#">Remover conta </a>
+            </div>
+            <div class="group">
+                <p class="not-account">Não é Fabrício Santana </p>
+                <p class="not-account">
+                    <span class="link-blue ">Alternar contas</span>
+                    ou
+                    <span class="link-blue">Inscreva-se</span>
+                </p>
+            </div>
+            <div class="get-the-app ">
+                <p class="get-app">Baixe o aplicativo</p>
+                <div class="download">
+                    <a class="app-download" href="#"></a>
+                    <a class="app-download" href="#" ></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        function cell1(){
+            //img.classList.remove("fade-out");
+            //img.classList.add("fade-in");
+            document.getElementById('cell').classList.remove("fade-out");
+            document.getElementById('cell').src="img/cell-1.png";
+            document.getElementById('cell').classList.add("fade-in");
+            setTimeout(function(){
+                document.getElementById('cell').classList.remove("fade-in");
+                document.getElementById('cell').classList.add("fade-out");
+                setTimeout(function(){
+                    cell2();
+                }, 500);
+                    
+            }, 6000);
+        }
+        
+        function cell2(){
+            document.getElementById('cell').classList.remove("fade-out");
+            document.getElementById('cell').src="img/cell-2.png";
+            document.getElementById('cell').classList.add("fade-in");
+            
+            setTimeout(function(){
+                document.getElementById('cell').classList.remove("fade-in");
+                document.getElementById('cell').classList.add("fade-out");
+                setTimeout(function(){
+                }, 500);
+                    cell3();
+            }, 6000);
+            
+        }
+        
+        function cell3(){
+            document.getElementById('cell').classList.remove("fade-out");
+            document.getElementById('cell').src="img/cell-3.png";
+            document.getElementById('cell').classList.add("fade-in");
+            
+            setTimeout(function(){
+                document.getElementById('cell').classList.remove("fade-in");
+                document.getElementById('cell').classList.add("fade-out");
+                setTimeout(function(){
+                }, 500);
+                    cell4();
+            }, 6000);
+            
+        }
+        function cell4(){
+            document.getElementById('cell').classList.remove("fade-out");
+            document.getElementById('cell').src="img/cell-4.png";
+            document.getElementById('cell').classList.add("fade-in");
+            
+            setTimeout(function(){
+                document.getElementById('cell').classList.remove("fade-in");
+                document.getElementById('cell').classList.add("fade-out");
+                setTimeout(function(){
+                }, 500);
+                    cell5();
+            }, 6000);
+            
+        }
+        function cell5(){
+            document.getElementById('cell').classList.remove("fade-out");
+            document.getElementById('cell').src="img/cell-5.png";
+            document.getElementById('cell').classList.add("fade-in");
+            
+            setTimeout(function(){
+                document.getElementById('cell').classList.remove("fade-in");
+                document.getElementById('cell').classList.add("fade-out");
+                setTimeout(function(){
+                }, 500);
+                    cell1();
+            }, 6000);
+            
+        }
+        
+        </script>
+</body>
+</html>
