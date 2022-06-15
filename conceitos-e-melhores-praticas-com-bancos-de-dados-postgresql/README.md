@@ -78,6 +78,43 @@ No sistema operacional Ubuntu, se o PostgreSQL foi instalado a partir do reposit
 ## Parte 2: O arquivo pg_hda.conf
 Conceitos e melhores práticas com banco de dados PostgreSQL
 
+#### Definição
+Arquivo responsável pelo controle de autenticação dos usuários no servidor PostgreSQL.
+O portmato de arquivo pode ser:
+
+```
+local         database  user  auth-method [auth-options]
+host          database  user  address     auth-method  [auth-options]
+hostssl       database  user  address     auth-method  [auth-options]
+hostnossl     database  user  address     auth-method  [auth-options]
+hostgssenc    database  user  address     auth-method  [auth-options]
+hostnogssenc  database  user  address     auth-method  [auth-options]
+host          database  user  IP-address  IP-mask      auth-method  [auth-options]
+hostssl       database  user  IP-address  IP-mask      auth-method  [auth-options]
+hostnossl     database  user  IP-address  IP-mask      auth-method  [auth-options]
+hostgssenc    database  user  IP-address  IP-mask      auth-method  [auth-options]
+hostnogssenc  database  user  IP-address  IP-mask      auth-method  [auth-options]
+```
+
+## Método de autenticação
+
+ - trust - A conexão é permitida incondicionalmente. Este método permite a qualquer um que possa se conectar ao servidor de banco de dados PostgreSQL se autenticar como o usuário do PostgreSQL que for desejado, sem necessidade de senha.
+ - reject - A conexão é rejeitada incondicionalmente. É útil para "eliminar por filtragem" certos hospedeiros de um grupo.
+ - md5 - Requer que o cliente forneça uma senha criptografada pelo método md5 para autenticação. 
+ - crypt - Requer que o cliente forneça uma senha criptografada através de crypt() para autenticação. Deve-se dar preferência ao método md5 para os clientes com versão 7.2 ou posterior, mas os clientes com versão anterior a 7.2 somente suportam crypt.
+ - password - Requer que o cliente forneça uma senha não criptografada para autenticação. Uma vez que a senha é enviada em texto puro pela rede, não deve ser utilizado em redes não confiáveis. 
+ - krb4 - É utilizado Kerberos V4 para autenticar o usuário. Somente disponível para conexões TCP/IP. 
+ - krb5 - É utilizado Kerberos V5 para autenticar o usuário. Somente disponível para conexões TCP/IP.
+ - ident - Obtém o nome de usuário do sistema operacional do cliente (para conexões TCP/IP fazendo contato com o servidor de identificação no cliente, para conexões locais obtendo a partir do sistema operacional) e verifica se o usuário possui permissão para se conectar como o usuário de banco de dados solicitado consultando o mapa especificado após a palavra chave ident. .
+ - pam - Autenticação utilizando o serviço Pluggable Authentication Modules (PAM) fornecido pelo sistema operacional. 
+
+
+
+
+
+
+
+
 
 
 
