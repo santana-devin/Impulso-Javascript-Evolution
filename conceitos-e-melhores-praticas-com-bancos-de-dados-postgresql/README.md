@@ -107,12 +107,78 @@ hostnogssenc  database  user  IP-address  IP-mask      auth-method  [auth-option
  - krb5 - É utilizado Kerberos V5 para autenticar o usuário. Somente disponível para conexões TCP/IP.
  - ident - Obtém o nome de usuário do sistema operacional do cliente (para conexões TCP/IP fazendo contato com o servidor de identificação no cliente, para conexões locais obtendo a partir do sistema operacional) e verifica se o usuário possui permissão para se conectar como o usuário de banco de dados solicitado consultando o mapa especificado após a palavra chave ident. .
  - pam - Autenticação utilizando o serviço Pluggable Authentication Modules (PAM) fornecido pelo sistema operacional. 
+ - GSS - Generic Security service application program interface
+ - SSPI - Security support provider interfice - somente para windows
+ - KRB5 - Kerberos V5
+ - PEER - Uriliza o usuário do siostema operacional do cliente
+ - IDENT - Utiliza o usuário do sistema operacional do cliente via server
+ - LDAP - LDAP server
+ - RADIUS - Radius server
+ - CERT - autencicação via certificado SSL do cliente
+
+```
+# Database administrative login by Unix domain socket
+local   all             postgres                                peer
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+
+# "local" is for Unix domain socket connections only
+local   all             all                                     peer    map=testmap
+# IPv4 local connections:
+host    all             all             127.0.0.1/32            md5
+# IPv6 local connections:
+host    all             all             ::1/128                 md5
+```
 
 
+## Parte 3: O arquivo pg_ident.conf
+#### Conceitos e melhores práticas com banco de dados postigreSQL
+
+## Descrição
+Arquivo responsável por mapear os usuários do sitema operacional com o s usuários do banco de dados.  
+Localizado no diretório de dados PGDATA de sua instalação.  
+A opção ident deve ser utilizada no arquivo pg_hdb.conf
+
+```
+# Put your actual configuration here
+# ----------------------------------
+# MAPNAME       SYSTEM-USERNAME         PG-USERNAME
+User123         LinuxUser               PGUser
+```
+
+## Parte 4 - Comandos administrativos
+#### Conceitos e melhores práticas com banco de dados PostgreSQL
+
+# Ubuntu
+
+#### Listando os Clusters
+Use o comando pg_lsclusters para listar as instalações. No meu caso há as versões 11 e 14. A 11 havia instalado noutro momento.
+
+```
+elder@server01:~$ sudo pg_lsclusters 
+Ver Cluster Port Status                Owner    Data directory              Log file
+11  main    5432 down,binaries_missing postgres /var/lib/postgresql/11/main /var/log/postgresql/postgresql-11-main.log
+14  main    5433 online                postgres /var/lib/postgresql/14/main /var/log/postgresql/postgresql-14-main.log
+```
 
 
+##### pg_clt e pg_ctlcluster
+ 
+As duas ferramentas são usadas para controlar o PostgreSQL. A diferença é que:
 
+pg_ctl é um comando do PostgreSQL.
 
+pg_ctlcluster é um programa feito pelo Debian em Perl como substituto do pg_ctl. Lembre-se disso, pois em outras distros não haverá uma ferramenta pg_ctlcluster.  
+*** Start, Stop, Status, Restart de clusters postgreSQL ***
+
+##### Reconfigure seus locales:
+> dpkg-reconfigure locales
+
+#### Crie o cluster corretamente (minha versão é a 9.3):
+> pg_createcluster 9.3 main --start
+ 
+#### Inicie o PostgreSQL:
+> /etc/init.d/postgresql start
 
 
 
