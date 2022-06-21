@@ -180,7 +180,49 @@ pg_ctlcluster é um programa feito pelo Debian em Perl como substituto do pg_ctl
 #### Inicie o PostgreSQL:
 > /etc/init.d/postgresql start
 
+# CentOS
+#### Comandos administrativos
 
+# systemctl <action> <cluster>
+ 
+  - start - Inicia o cluster do porstegreSQL
+  - status - Mosta status do cluster PostegreSQL
+  - stop - para o closter
+  - restarte - testarta o cluster
+ 
+ # Binários do PostegreSQL
+ 
+  - createdb
+  - createuser
+  - dropdb
+  - dropuser
+  - initdb
+  - pg_ctl
+  - pg_basebackup
+  - pg_dump / pg_dumpall
+  - pg_restote
+  - psql
+  - reindexdb
+  - vacuumdb
+  
+ 
+# Arctetura / Hierarquia
+ 
+ #### Cluster
+ Coleção de banco de dados que compartilham as mesmas configurações(arquivos de configuração) do PostgreSQL e do sistema operacional (porta,listen_addresses, etc).
+ 
+ #### Banco de dados  (database)
+ Conjunto de schemas com seus objetos/relações (tabelas, funcões, views,etc)
+ 
+ #### schemas
+ Conjunto de objeto/relações (tabelas, funçoes views, etc)
+ 
+ 
+ 
+# PGAdmin
+ #### Conceitos e melhores práticas do banco de dados PostegreSQL
+ 
+ 
 
 
 
