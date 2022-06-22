@@ -224,9 +224,190 @@ pg_ctlcluster é um programa feito pelo Debian em Perl como substituto do pg_ctl
  
  
 
+# Parte 1:  Database , schemas e objatos
+ 
+ #### Database
+ É o banco de dados.  
+ Grupos de schemas e seus objetos, como tabelas, types, views, funções, entre outros.  
+ Seus Schemas e objetos não podem ser compartilhados entre si.  
+Cada database é separado um do outro compartilhando apenas usuários/roles  e configurações de cluster ProstegreSQL.
+ 
+ #### Schemas
+ É um grupo de pbjetos, como tabelas, types, views, funções, entre outros.  
+ É possívle relacionar objetos entre diversos schemas.  
+ Por exemplo: schema public e schema curso podem  ter tabelas com o mesmo nome(treste por exemplo) relacionando-se entre si.
+ 
+ #### Objetos
+ São as tabelas, views, funções, types, sequences, entre outros, pertencentes ao schemas.
+ 
+ 
+```
+ CREATE DATABASE name
+    [ [ WITH ] [ OWNER [=] user_name ]
+           [ TEMPLATE [=] template ]
+           [ ENCODING [=] encoding ]
+           [ LOCALE [=] locale ]
+           [ LC_COLLATE [=] lc_collate ]
+           [ LC_CTYPE [=] lc_ctype ]
+           [ TABLESPACE [=] tablespace_name ]
+           [ ALLOW_CONNECTIONS [=] allowconn ]
+           [ CONNECTION LIMIT [=] connlimit ]
+           [ IS_TEMPLATE [=] istemplate ] ]
+ 
+ ```
+ 
+ ```
+ ALTER DATABASE name [ [ WITH ] option [ ... ] ]
 
+where option can be:
 
+    ALLOW_CONNECTIONS allowconn
+    CONNECTION LIMIT connlimit
+    IS_TEMPLATE istemplate
 
+ALTER DATABASE name RENAME TO new_name
 
+ALTER DATABASE name OWNER TO { new_owner | CURRENT_ROLE | CURRENT_USER | SESSION_USER }
 
+ALTER DATABASE name SET TABLESPACE new_tablespace
 
+ALTER DATABASE name SET configuration_parameter { TO | = } { value | DEFAULT }
+ALTER DATABASE name SET configuration_parameter FROM CURRENT
+ALTER DATABASE name RESET configuration_parameter
+ALTER DATABASE name RESET ALL
+ ```
+
+ ```
+ DROP DATABASE [ IF EXISTS ] name [ [ WITH ] ( option [, ...] ) ]
+
+where option can be:
+
+    FORCE
+ ```
+
+# Schemas
+ 
+ ```
+ CREATE SCHEMA schema_name [ AUTHORIZATION role_specification ] [ schema_element [ ... ] ]
+ CREATE SCHEMA AUTHORIZATION role_specification [ schema_element [ ... ] ]
+ CREATE SCHEMA IF NOT EXISTS schema_name [ AUTHORIZATION role_specification ]
+ CREATE SCHEMA IF NOT EXISTS AUTHORIZATION role_specification
+
+where role_specification can be:
+
+    user_name
+  | CURRENT_ROLE
+  | CURRENT_USER
+  | SESSION_USER
+ 
+```
+ 
+ ```
+ ALTER SCHEMA name RENAME TO new_name
+ ALTER SCHEMA name OWNER TO { new_owner | CURRENT_ROLE | CURRENT_USER | SESSION_USER }
+ ```
+ 
+ ```
+ DROP SCHEMA [name]
+ ```
+ 
+#### Melhores práticas
+ 
+ > CREATE SCHEMA IF NOT EXISTS schema_name [AUTHORIZATION role_specification]
+ 
+ > DROP SCHEMA IF EXISTS [name]
+
+ 
+ # Parte 2: Tabelas, columas e tipos de dados
+ 
+ Definição de tabela é conjunto de dados dispostos em colunas e linhas referente a um objetivo comum.
+ 
+ As colunas são concideradas como "campos das tabelas", como atributos da tabela.
+ 
+ As linhas de uma tabela são chamadas também de tuplas, e é onde estão contidos os valores, os dados.
+ 
+ 
+ ## Primary key / Chave primária / PK
+ No conceito de modelo de  dados relacionados e obedecendo as regras de normalização, uma PK é um conjunto de um ou mais campos que nunca se repetem em uma tabela e que seus valores garantem a integridade dos dados únicos e a utilização do mesmo como referência para relacionamento entre demais tabelas.
+ 
+  - não pode haver duas ocorrências de uma mesma entidade com o mesmos conteúdo ba PK
+  - A chave primária não pode ser composta por atributos opcionail, ou seja, atributos qua aceite nulo.
+  - Os atributos identificadores devem ser o conjunto minimo que pode identificar cada instância de uma entidade.
+  - Não devem ser usados chaves externas
+  - Não deve conter informaçõe volátil.
+ 
+ 
+ ## Foreign Key / Chave estrangeira / FK
+ Campo, ou conjunto de campos que são referências de chaves primárias de outras tabelas ou da mesma tabela.  
+ Sua principal função é garantir a integridade referencial entra tabelas.
+ 
+
+Name	| Aliases |	Description
+---------- | --------------| -----------------------------------------
+bigint |	int8	| signed eight-byte integer
+bigserial |	serial8	| autoincrementing eight-byte integer
+bit [ (n) ] |  |	fixed-length bit string
+bit varying [ (n) ] |	varbit [ (n) ] |	variable-length bit string
+boolean |	bool |	logical Boolean (true/false)
+box | |	rectangular box on a plane
+bytea | |	binary data (“byte array”)
+character [ (n) ] |	char [ (n) ] |	fixed-length character string
+character varying [ (n) ] |	varchar [ (n) ] |	variable-length character string
+cidr | | 	IPv4 or IPv6 network address
+circle | |	circle on a plane
+date | |	calendar date (year, month, day)
+double precision |	float8 |	double precision floating-point number (8 bytes)
+inet | | 	IPv4 or IPv6 host address
+integer |	int, int4 |	signed four-byte integer
+interval [ fields ] [ (p) ] | |	 	time span
+json | |	textual JSON data
+jsonb | |	binary JSON data, decomposed
+line | |	infinite line on a plane
+lseg | |	line segment on a plane
+macaddr | |	MAC (Media Access Control) address
+macaddr8 | |	MAC (Media Access Control) address (EUI-64 format)
+money | |	currency amount
+numeric [ (p, s) ] |	decimal [ (p, s) ] |	exact numeric of selectable precision
+path | |	geometric path on a plane
+pg_lsn | |	PostgreSQL Log Sequence Number
+pg_snapshot | |	user-level transaction ID snapshot
+point | |	geometric point on a plane
+polygon | |	closed geometric path on a plane
+real |	float4 |	single precision floating-point number (4 bytes)
+smallint |	int2 |	signed two-byte integer
+smallserial |	serial2 |	autoincrementing two-byte integer
+serial |	serial4 |	autoincrementing four-byte integer
+text | |	variable-length character string
+time [ (p) ] [ without time zone ] | | time of day (no time zone)
+time [ (p) ] with time zone |	timetz |	time of day, including time zone
+timestamp [ (p) ] [ without time zone ] | |	date and time (no time zone)
+timestamp [ (p) ] with time zone |	timestamptz |	date and time, including time zone
+tsquery | |	text search query
+tsvector	| | text search document
+txid_snapshot | |	user-level transaction ID snapshot (deprecated; see pg_snapshot)
+uuid | |	universally unique identifier
+xml | |	XML data
+
+ 
+# Parte 3: DML e DDL
+ 
+ #### DML - Data manipulation Language
+ Linguagem de manipulação de dados  
+ INSERT, UPDATE, DELETE, SELECT  
+ * o select, alguns consideram como DML, outros como DQL, que significa query language, ou linguagem de consulta de dados
+ 
+ #### DDl - Dara definition laguage
+ Linguagem de definição de dados  
+ CREATE, ALTER, DROP
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
