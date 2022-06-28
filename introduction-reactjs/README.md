@@ -18,7 +18,16 @@
    - If-Else inline com Operador Condicional
    - Evitando que um Componente seja Renderizado
    
-   
+ 
+ #### Lista e Chaves
+ 
+  -  Renderizando múltiplos componentes
+  -  Componentes de lista básicas
+  -  Chaves
+  -  Extraindo componentes com chaves
+  -  Chaves devem ser únicas apenas entre Elementos irmãos
+
+
  
  
  
