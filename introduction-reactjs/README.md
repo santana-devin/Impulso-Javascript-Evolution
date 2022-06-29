@@ -28,6 +28,26 @@
   -  Chaves devem ser únicas apenas entre Elementos irmãos
 
 
+#### Manipulação de eventos
+Manipular eventos em elementos React é muito semelhante a manipular eventos em elementos do DOM.  
+
+Exixtem algumas diferenças sintáticas:
+  - Eventos em React são nomeados usando camelCase ao invés de letras minúsculas
+  - Com o JSX você passa uma função como manipulador de eventos ao invés de um texto.
+  - Eventos
+  - Passando argumentos para Manipuladores de enventos
+  
+  https://pt-br.reactjs.org/docs/handling-events.html
+  
+  #### Pensando do jeito React
+   - Comece com um Monck
+   - Separe a Ui em uma hierarquia de componentes
+   - Crie uma versão estática em React
+   - Identifique a prepresentação mínima (mas completa) do State
+   - identifique onde o State deve ficar
+   - Adicione o fluxo de dados inverso
+
+
  
  
  
